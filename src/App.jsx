@@ -7,7 +7,7 @@ import Jobs from "./pages/jobs"
 import JobListing from "./pages/job-listing"
 import SavedJobs from "./pages/saved-jobs"
 import PostJobs from "./pages/post-jobs"
-import { ThemeProvider } from "./components/theme.provided"
+import { ThemeProvider } from "./components/theme.provider"
 
 function App() {
   const router=createBrowserRouter(
