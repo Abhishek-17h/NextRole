@@ -10,42 +10,25 @@ import PostJobs from "./pages/post-jobs"
 import { ThemeProvider } from "./components/theme.provider"
 
 function App() {
-  const router=createBrowserRouter(
-    [
-      {
-        element:<AppLayout/>,
-        children:[
-          {
-            path:"/",
-            element:<LandingPage/>
-          },
-          {
-            path:"/onboarding",
-            element:<Onboarding/>
-          },
-          {
-            path:"/job-listing",
-            element:<JobListing/>
-          },
-          {
-            path:"/jobs/:id",
-            element:<Jobs/>
-          },
-          {
-            path:"/saved-jobs",
-            element:<SavedJobs/>
-          },
-          {
-            path:"/post-jobs",
-            element:<PostJobs/>
-          }
-        ]
-      }
-    ]
-  )
+  const routes = [
+    {
+      element: <AppLayout />,
+      children: [
+        { path: "/", element: <LandingPage /> },
+        { path: "/onboarding", element: <Onboarding /> },
+        { path: "/job-listing", element: <JobListing /> },
+        { path: "/jobs/:id", element: <Jobs /> },
+        { path: "/saved-jobs", element: <SavedJobs /> },
+        { path: "/post-jobs", element: <PostJobs /> },
+      ],
+    },
+  ];
+
+  const router = createBrowserRouter(routes);
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-    <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </ThemeProvider>
   )
 }
