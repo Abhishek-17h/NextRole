@@ -109,15 +109,6 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
-@layer utilities{
-  .gradient{
-    @apply bg-gradient-to-br from-grey-500 via-grey-200 to-white;
-  }
-
-  .gradient.title{
-    @apply gradient text-transparent bg-clip-text;
-  }
-}
 
 @layer base {
   * {

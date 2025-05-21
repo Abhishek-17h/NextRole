@@ -6,9 +6,9 @@ import { SignedOut, SignInButton, UserButton,SignedIn } from '@clerk/clerk-react
 const Header = () => {
     return (
         <>
-            <nav className='py-4 px-10 flex justify-between items-center'>
+            <nav className='px-10 flex justify-between items-center'>
                 <Link>
-                    <img src="/NextRole.jpg" className='h-20' />
+                    <img src="/NextRole.jpg" className='h-30' />
                 </Link>
                 <SignedOut>
                     <SignInButton />

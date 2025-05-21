@@ -4,8 +4,8 @@ import { Outlet } from "react-router-dom";
 const AppLayout = () => {
   return (
     <div>
-      <div className="grid-background"></div>
-      <main className="min-h-screen container">
+      <div className="grid-background container mx-auto"></div>
+      <main className="min-h-screen">
         <Header />
         <Outlet />
       </main>
