@@ -1,11 +1,11 @@
 import React from 'react'
 
-const JobListing = () => {
+function MyJobs() {
   return (
     <div>
-      
+      my jobs
     </div>
   )
 }
 
-export default JobListing;
+export default MyJobs;
