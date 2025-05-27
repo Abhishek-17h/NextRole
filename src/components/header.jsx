@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Button } from './ui/button'
-import { SignedOut, SignInButton, UserButton, SignedIn, SignIn } from '@clerk/clerk-react'
+import { SignedOut, SignInButton, UserButton, SignedIn, SignIn, useUser } from '@clerk/clerk-react'
 import { BriefcaseBusinessIcon, Heart, PenBox } from 'lucide-react'
 
 const Header = () => {
     const [showSignin, setshowSignin] = useState(false);
     const [search, setSearch] = useSearchParams();
+    const {user}=useUser();
 
     const handleOverLayClick = (e) => {
         if (e.target === e.currentTarget) {
@@ -32,12 +33,14 @@ const Header = () => {
                         <Button variant="outline" onClick={() => setshowSignin(true)}>Login</Button>
                     </SignedOut>
                     <SignedIn>
-                        <Link to="/post-jobs">
+                        { user?.unsafeMetadata?.role==="recruiter" && (
+                            <Link to="/post-jobs">
                             <Button variant="destructive" className="rounded-full text-center pb-2">
                                 <PenBox size={20} />
                                 Post a Job
                             </Button>
                         </Link>
+                        )}
                         <UserButton
                         appearance={{
                             elements:{
