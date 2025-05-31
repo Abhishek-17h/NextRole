@@ -1,32 +1,55 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getJobs } from "@/api/apiJobs";
 import useFetch from "@/hooks/use-fetch";
+import { useUser } from "@clerk/clerk-react";
+import { BarLoader } from "react-spinners";
+import JobCard from "@/components/job-card";
 
 const JobListing = () => {
+  const { isLoaded } = useUser();
+  const [location, setLocation] = useState("");
+  const [company_id, setCompanyId] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const {
     fetchData: fetchJobs,
     data: jobsData,
-    loading,
-    error,
-  } = useFetch(getJobs, {});
+    loading
+  } = useFetch(getJobs, {
+    location,
+    company_id,
+    searchQuery
+  });
+  console.log("Jobs Data:", jobsData);
 
   useEffect(() => {
-    fetchJobs();
-  }, []);
+    if (isLoaded) fetchJobs(); 423
+  }, [isLoaded, company_id, location, searchQuery]);
 
-  console.log("Jobs Data:", jobsData);
+  if (!isLoaded) {
+    return <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />;
+  }
 
   return (
     <div>
-      <h2>Job Listings 2</h2>
-      {loading && <p>Loading...</p>}
-      {jobsData &&
-        jobsData.map((job) => (
-          <div key={job.id}>
-            <h4>{job.title}</h4>
-            <p>{job.description}</p>
-          </div>
-        ))}
+      <h1 className="gradient-title font-extrabold text-6xl sm:text-7xl text-center pb-8">
+        Latest Jobs
+      </h1>
+      {loading &&
+        <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
+      }
+
+      {loading===false &&(
+      <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {jobsData?.length ? (
+          jobsData.map((job) => {
+            return <JobCard key={job.id} job={job} />;
+          })):(
+            <div>Jobs not found</div>
+          )}
+      </div>
+      )}
+
     </div>
   );
 };
