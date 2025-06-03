@@ -8,7 +8,7 @@ const useFetch = (cb, options = {}) => {
 
   const { session } = useSession(); 
 
-  const fetchData = async (...args) => {
+  const fn = async (...args) => {
     setLoading(true);
     setError(null);
     try {
@@ -25,7 +25,7 @@ const useFetch = (cb, options = {}) => {
     }
   };
 
-  return { fetchData, data, loading, error }; 
+  return { fn, data, loading, error }; 
 };
 
 export default useFetch;

@@ -50,3 +50,19 @@ export async function saveJob(token, { alreadySaved }, saveData) {
     }
 
 }
+
+export async function getSignleJob(token, job_id) {
+    const superbase = await superbaseClient(token);
+
+    const { data, error } = await superbase
+        .from("jobs")
+        .select("*,company:companies(name,logo_url),applications:applications(*)")
+        .eq("id", job_id)
+        .single();
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}
