@@ -20,7 +20,6 @@ const JobListing = () => {
     company_id,
     searchQuery
   });
-  console.log("Jobs Data:", jobsData);
 
   useEffect(() => {
     if (isLoaded) fetchJobs(); 423
@@ -39,15 +38,15 @@ const JobListing = () => {
         <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
       }
 
-      {loading===false &&(
-      <div className="mt-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {jobsData?.length ? (
-          jobsData.map((job) => {
-            return <JobCard key={job.id} job={job} />;
-          })):(
+      {loading === false && (
+        <div className="mt-4 mx-4 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {jobsData?.length ? (
+            jobsData.map((job) => {
+              return <JobCard key={job.id} job={job} savedInit={job?.saved?.length > 0} />;
+            })) : (
             <div>Jobs not found</div>
           )}
-      </div>
+        </div>
       )}
 
     </div>

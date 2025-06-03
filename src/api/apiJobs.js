@@ -1,24 +1,52 @@
 import superbaseClient from "@/utils/superbase";
 
 
-export async function getJobs(token,{location,company_id,searchQuery}) {
-    const superbase= await superbaseClient(token);
+export async function getJobs(token, { location, company_id, searchQuery }) {
+    const superbase = await superbaseClient(token);
 
-    let query=superbase.from("jobs").select("*,company:companies(name,logo_url),saved:saved_job(id)");
-    if(location){
-        query=query.eq("location",location);
+    let query = superbase.from("jobs").select("*,company:companies(name,logo_url),saved:saved_job(id)");
+    if (location) {
+        query = query.eq("location", location);
     }
-    if(company_id){
-        query=query.eq("company_id",company_id);
+    if (company_id) {
+        query = query.eq("company_id", company_id);
     }
-    if(searchQuery){
-        query=query.ilike("title",`%${searchQuery}%`);
+    if (searchQuery) {
+        query = query.ilike("title", `%${searchQuery}%`);
     }
 
-    const {data,error}=await query;
-    if(error){
+    const { data, error } = await query;
+    if (error) {
         throw error;
     }
 
     return data;
+}
+
+export async function saveJob(token, { alreadySaved }, saveData) {
+    const superbase = superbaseClient(token);
+
+    if (alreadySaved) {
+        const { data, error: deleteError } = await superbase
+            .from("saved_job")
+            .delete()
+            .eq("job_id", saveData.job_id);
+
+        if (deleteError) {
+            throw deleteError;
+        }
+        return data;
+    }
+    else{
+        const { data, error: insertError } = await superbase
+            .from("saved_job")
+            .insert([saveData])
+            .select();
+
+        if (insertError) {
+            throw insertError;
+        }
+        return data;
+    }
+
 }

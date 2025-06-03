@@ -1,17 +1,43 @@
-import React from 'react';
+import React, { use } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { Heart, MapPinIcon, Trash2Icon } from 'lucide-react';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
+import useFetch from '../hooks/use-fetch';
+import { useState, useEffect } from 'react';
+import { saveJob } from '../api/apiJobs';
 
 const JobCard = ({
     job,
     isMyjob = false,
-    savedInitial = false,
+    savedInit = false,
     onJobSaved = () => { },
 }) => {
+    const [saved, setSaved] = useState(savedInit);
     const { user } = useUser();
+
+    const {
+        fetchData: fnSavedJob,
+        data: savedJob,
+        loading: loadingSavedJob
+    } = useFetch(saveJob, {
+        alreadySaved: saved,
+    });
+
+    const handleSaveJob = async () => {
+        await fnSavedJob({
+            job_id: job.id,
+            user_id: user.id,
+        });
+        onJobSaved();
+    }
+
+    useEffect(() => {
+        if (savedJob !== undefined) {
+            setSaved(savedJob?.length > 0);
+        }
+    }, [savedJob]);
 
     return (
         <Card>
@@ -25,8 +51,9 @@ const JobCard = ({
             <CardContent className="flex flex-col gap-4 flex-1">
                 <div className='flex justify-between'>
                     {job.company && <img src={job.company.logo_url} alt={job.company.name} className="h-6" />}
-                    <div>
-                        <MapPinIcon size={15} /> {job.location}
+                    <div className='flex gap-2 items-center'>
+                        <MapPinIcon size={15} />
+                        {job.location}
                     </div>
                 </div>
                 <hr />
@@ -38,7 +65,22 @@ const JobCard = ({
                         More Details
                     </Button>
                 </Link>
-                <Heart size={20} stroke='red' fill='red'/>
+
+                {!isMyjob && (
+                    <Button
+                        variant="outline"
+                        className="w-15"
+                        onClick={handleSaveJob}
+                        disabled={loadingSavedJob}
+                    >
+                        {saved ? (
+                            <Heart size={20} stroke='red' fill='red' />
+                        ) : (<Heart size={20} />)
+                        }
+
+                    </Button>
+                )
+                }
             </CardFooter>
         </Card>
     )
