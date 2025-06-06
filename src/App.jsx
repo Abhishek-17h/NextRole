@@ -3,7 +3,7 @@ import { Button } from "./components/ui/button"
 import AppLayout from "./layout/app-layout"
 import LandingPage from "./pages/landing"
 import Onboarding from "./pages/onboarding"
-import Jobs from "./pages/jobs"
+import JobPage from "./pages/job"
 import JobListing from "./pages/job-listing"
 import SavedJobs from "./pages/saved-jobs"
 import PostJobs from "./pages/post-jobs"
@@ -19,7 +19,7 @@ function App() {
         { path: "/", element: <LandingPage /> },
         { path: "/onboarding", element: <ProtectedRoute><Onboarding /></ProtectedRoute> },
         { path: "/jobs", element: <ProtectedRoute><JobListing /></ProtectedRoute> },
-        { path: "/job/:id", element: <ProtectedRoute><Jobs /> </ProtectedRoute>},
+        { path: "/job/:id", element: <ProtectedRoute><JobPage /> </ProtectedRoute>},
         { path: "/saved-jobs", element: <ProtectedRoute><SavedJobs /></ProtectedRoute> },
         { path: "/post-jobs", element: <ProtectedRoute><PostJobs /></ProtectedRoute> },
         { path: "/my-jobs", element: <ProtectedRoute><MyJobs /></ProtectedRoute> },

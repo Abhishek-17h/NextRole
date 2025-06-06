@@ -17,7 +17,6 @@ const useFetch = (cb, options = {}) => {
       });
       const data = await cb(superbaseAccessToken, options, ...args);
       setData(data);
-      console.log("Response Data:", response.data);
     } catch (err) {
       setError(err);
     } finally {

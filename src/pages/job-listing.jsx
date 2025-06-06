@@ -45,7 +45,7 @@ const JobListing = () => {
   }, [isLoaded]);
 
   useEffect(() => {
-    if (isLoaded) fetchJobs(); 423
+    if (isLoaded) fetchJobs();
   }, [isLoaded, company_id, location, searchQuery]);
 
   if (!isLoaded) {
