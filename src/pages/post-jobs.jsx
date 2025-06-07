@@ -103,60 +103,65 @@ const PostJobs = () => {
           <p className="text-red-500">{errors.description.message}</p>
         )}
 
-        <div className="flex gap-4 items-center">
-          <Controller
-            name="location"
-            control={control}
-            render={({ field }) => (
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Job Location" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {State.getStatesOfCountry("IN").map(({ name }) => (
-                      <SelectItem key={name} value={name}>
-                        {name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            )}
-          />
-          <Controller
-            name="company_id"
-            control={control}
-            render={({ field }) => (
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Company">
-                    {field.value
-                      ? companies?.find((com) => com.id === Number(field.value))
+        <div className="flex gap-4 items-center w-full">
+          {/* Location Selector */}
+          <div className="flex-1">
+            <Controller
+              name="location"
+              control={control}
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Job Location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {State.getStatesOfCountry("IN").map(({ name }) => (
+                        <SelectItem key={name} value={name}>
+                          {name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
+
+          {/* Company Selector */}
+          <div className="flex-1">
+            <Controller
+              name="company_id"
+              control={control}
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Company">
+                      {field.value
+                        ? companies?.find((com) => com.id === Number(field.value))
                           ?.name
-                      : "Company"}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {companies?.map(({ name, id }) => (
-                      <SelectItem key={name} value={id}>
-                        {name}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            )}
-          />
-          <AddCompanyDrawer fetchCompanies={fnCompanies} />
+                        : "Company"}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {companies?.map(({ name, id }) => (
+                        <SelectItem key={id} value={id}>
+                          {name}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
+
+          {/* Add Company Drawer */}
+          <div className="shrink-0">
+            <AddCompanyDrawer fetchCompanies={fnCompanies} />
+          </div>
         </div>
-        {errors.location && (
-          <p className="text-red-500">{errors.location.message}</p>
-        )}
-        {errors.company_id && (
-          <p className="text-red-500">{errors.company_id.message}</p>
-        )}
 
         <Controller
           name="requirements"
