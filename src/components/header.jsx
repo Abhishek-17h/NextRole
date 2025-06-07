@@ -24,7 +24,7 @@ const Header = () => {
 
     return (
         <>
-            <nav className='px-10 flex justify-between items-center'>
+            <nav className='px-5 flex justify-between items-center'>
                 <Link>
                     <img src="/NextRole.jpg" className='h-30' />
                 </Link>
