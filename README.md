@@ -40,22 +40,6 @@
 
 ---
 
-## 📸 Screenshots
-
-![Homepage](https://next-role-xi.vercel.app/screenshots/homepage.png)
-*Homepage showcasing featured jobs.*
-
-![Job Details](https://next-role-xi.vercel.app/screenshots/job-details.png)
-*Detailed view of a job listing.*
-
-![Recruiter Dashboard](https://next-role-xi.vercel.app/screenshots/recruiter-dashboard.png)
-*Dashboard for recruiters to manage job postings.*
-
-![Candidate Dashboard](https://next-role-xi.vercel.app/screenshots/candidate-dashboard.png)
-*Dashboard for candidates to track applications.*
-
----
-
 ## 📦 Installation
 
 1. **Clone the repository**:
