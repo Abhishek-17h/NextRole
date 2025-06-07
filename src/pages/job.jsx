@@ -8,6 +8,7 @@ import { Briefcase, DoorClosed, DoorOpen, MapPinIcon } from "lucide-react";
 import MDEditor from "@uiw/react-md-editor";
 import { updateHiringStatus } from "@/api/apiJobs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import ApplyJobDrawer from "@/components/apply-job";
 
 const JobPage = () => {
   const { isLoaded, user } = useUser();
@@ -17,7 +18,7 @@ const JobPage = () => {
   const {
     loading: loadingJob,
     data: job,
-    fn: fnJob,
+    fn: fetchJob,
   } = useFetch(getSingleJob, { job_id: jobId });
 
   const {
@@ -29,7 +30,7 @@ const JobPage = () => {
     const isOpen = value === "open";
     fnHiringStatus(isOpen)
       .then(() => {
-        fnJob();
+        fetchJob();
       })
       .catch((error) => {
         console.error("Error updating hiring status:", error);
@@ -37,7 +38,7 @@ const JobPage = () => {
   };
 
   useEffect(() => {
-    fnJob();
+    fetchJob();
   }, [isLoaded, jobId]);
 
   if (!isLoaded || loadingJob) {
@@ -109,6 +110,14 @@ const JobPage = () => {
         source={job?.requirements || "No requirements specified."}
       />
       {/* render applications*/}
+      {job?.recruiter_id !== user?.id && (
+          <ApplyJobDrawer
+          job={job}
+          user={user}
+          fetchJob={fetchJob}
+          applied={job?.applications?.find((ap)=>ap.candidate_id === user?.id)}
+          />
+      )}
     </div>
   );
 };
