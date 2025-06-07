@@ -10,7 +10,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const LandingPage = () => {
     return (
-        <main className="flex flex-col gap-10 sm: gap-20 py-10 sm:py-20 px-5">
+        <main className="flex flex-col gap-10 sm: py-10 sm:py-20 px-5">
             <section className="text-center ">
                 <h1 className="flex flex-col items-center justify-center text-4xl font-extrabold sm:text-6xl lg:text-8xl gradient-title tracking-tighter py-4 ">
                     Find Your Dream Job{" "}
@@ -38,7 +38,7 @@ const LandingPage = () => {
                 })}</CarouselContent>
             </Carousel>
             <div>
-                <img src="/banner.png" alt="banner" className="w-full" />
+                <img src="/banner1.png" alt="banner" className="w-full" />
             </div>
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <Card>
