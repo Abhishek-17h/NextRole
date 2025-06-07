@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { Button } from "./components/ui/button"
 import AppLayout from "./layout/app-layout"
 import LandingPage from "./pages/landing"
 import Onboarding from "./pages/onboarding"
