@@ -88,18 +88,6 @@
 
 ---
 
-## 🧪 Testing
-
-To run tests (if implemented), use:
-
-```bash
-npm run test
-```
-
-*Note: Testing setup details would go here if tests are implemented.*
-
----
-
 ## 📁 Project Structure
 
 ```
