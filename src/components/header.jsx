@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Button } from './ui/button'
-import { SignedOut, SignInButton, UserButton, SignedIn, SignIn, useUser } from '@clerk/clerk-react'
+import { SignedOut, UserButton, SignedIn, SignIn, useUser } from '@clerk/clerk-react'
 import { BriefcaseBusinessIcon, Heart, PenBox } from 'lucide-react'
 
 const Header = () => {
     const [showSignin, setshowSignin] = useState(false);
     const [search, setSearch] = useSearchParams();
     const {user}=useUser();
+
+     useEffect(() => {
+        if (search.get("sign-in")) {
+            setshowSignin(true)
+        }
+    }, [search]);
 
     const handleOverLayClick = (e) => {
         if (e.target === e.currentTarget) {
@@ -16,16 +22,10 @@ const Header = () => {
         }
     }
 
-    useEffect(() => {
-        if (search.get("sign-in")) {
-            setshowSignin(true)
-        }
-    }, [search]);
-
     return (
         <>
             <nav className='px-5 flex justify-between items-center'>
-                <Link>
+                <Link to="/"> 
                     <img src="/NextRole.jpg" className='h-30' />
                 </Link>
                 <div className='flex gap-4'>
@@ -72,7 +72,7 @@ const Header = () => {
                         onClick={handleOverLayClick}>
                         <SignIn
                             signUpForceRedirectUrl='/onboarding'
-                            signUpFallbackRedirectUrl='/onboarding'
+                            fallbackRedirectUrl='/onboarding'
                         />
                     </div>
                 )
