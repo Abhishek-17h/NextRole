@@ -38,7 +38,7 @@ const LandingPage = () => {
                 })}</CarouselContent>
             </Carousel>
             <div>
-                <img src="/banner1.png" alt="banner" className="w-full" />
+                <img src="/banner2.png" alt="banner" className="w-full h-auto" />
             </div>
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <Card>
