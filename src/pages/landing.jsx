@@ -15,7 +15,7 @@ const LandingPage = () => {
                 <h1 className="flex flex-col items-center justify-center text-4xl font-extrabold sm:text-6xl lg:text-8xl gradient-title tracking-tighter py-4 ">
                     Find Your Dream Job{" "}
                     <span className="flex items-center gap-2 sm:gap-6">and get{" "}
-                        <img src="/NextRole.jpg" alt="NextRole logo" className="h-22 w-20 sm:h-42 w-40 lg:h-52 w-50 py-10" />
+                        <img src="/NextRole.jpg" alt="NextRole logo" className="h-14 sm:h-24 lg:h-32" />
                     </span>
                 </h1>
                 <p className="text-gray-300 sm:mt-4 text-xs sm:text-xl">Explore the thousands of job listings or find the perfect candidate</p>
